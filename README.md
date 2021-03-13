@@ -1,4 +1,4 @@
-# Publisher (pbr)
+# Publisher (pbl)
 
 Publisher is a simple command line application for creating artifacts from data
 and a mustache template.
@@ -20,9 +20,9 @@ OPTIONS:
     -t, --template <template>    Mustache template [env: PBR_TEMPLATE=]  [default: pbr-template.mustache]
 ```
 
-## Why was pbr created?
+## Why was pbl created?
 
-The first use case for `pbr` was to create a templated `CONTRIBUTING.md` 
+The first use case for `pbl` was to create a templated `CONTRIBUTING.md` 
 document for a project given a data file describing the project.
 
 ## Roadmap
