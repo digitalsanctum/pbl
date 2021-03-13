@@ -16,8 +16,8 @@ FLAGS:
     -V, --version    Prints version information
 
 OPTIONS:
-        --data <data>            A JSON data file [env: PBR_DATA=]  [default: pbr-data.json]
-    -t, --template <template>    Mustache template [env: PBR_TEMPLATE=]  [default: pbr-template.mustache]
+        --data <data>            A JSON data file [env: PBL_DATA=]  [default: pbl-data.json]
+    -t, --template <template>    Mustache template [env: PBL_TEMPLATE=]  [default: pbl-template.mustache]
 ```
 
 ## Why was pbl created?

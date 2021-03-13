@@ -31,8 +31,8 @@ fn main() -> Result<(), Box<dyn Error>> {
                         .help("A JSON data file")
                         .long("data")
                         .takes_value(true)
-                        .env("PBR_DATA")
-                        .default_value("pbr-data.json")
+                        .env("PBL_DATA")
+                        .default_value("pbl-data.json")
                         .required(true),
                 )
                 .arg(
@@ -41,8 +41,8 @@ fn main() -> Result<(), Box<dyn Error>> {
                         .short("t")
                         .long("template")
                         .takes_value(true)
-                        .env("PBR_TEMPLATE")
-                        .default_value("pbr-template.mustache")
+                        .env("PBL_TEMPLATE")
+                        .default_value("pbl-template.mustache")
                         .required(true),
                 ),
         )
