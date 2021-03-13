@@ -7,6 +7,10 @@ edition = "2018"
 license-file = "LICENSE"
 readme = "README.md"
 repository = "https://github.com/digitalsanctum/pbl"
+exclude = [
+    "*.json",
+    "*.mustache"
+]
 
 [dependencies]
 clap = "2.33.1"
