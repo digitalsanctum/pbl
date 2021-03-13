@@ -20,16 +20,16 @@ jobs:
         include:
           - name: linux
             os: ubuntu-latest
-            artifact_name: gars
-            asset_name: gars-linux
+            artifact_name: pbl
+            asset_name: pbl-linux
           - name: windows
             os: windows-latest
-            artifact_name: gars.exe
-            asset_name: gars-windows
+            artifact_name: pbl.exe
+            asset_name: pbl-windows
           - name: macos
             os: macos-latest
-            artifact_name: gars
-            asset_name: gars-macos
+            artifact_name: pbl
+            asset_name: pbl-macos
 
     steps:
     - uses: actions/checkout@v1
