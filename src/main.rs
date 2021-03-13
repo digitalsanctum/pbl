@@ -18,7 +18,7 @@ mod model;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let arg_matches: ArgMatches = App::new("publisher")
-        .version("0.1.0")
+        .version("0.1.1")
         .author("Shane Witbeck")
         .about("Publisher")
         .settings(&[AppSettings::ArgRequiredElseHelp])
