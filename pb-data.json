@@ -1,0 +1,41 @@
+{
+  "team_name": "PCS",
+  "repo_name": "pcs-api",
+  "change_log": "CHANGELOG.md",
+  "issue_tracker": {
+    "name": "JIRA",
+    "base_url": "https://jira.nike.com/projects/PCOE/summary",
+    "create_issue_url": "https://jira.nike.com/secure/CreateIssue!default.jspa",
+    "existing_issues_url": "https://jira.nike.com/secure/RapidBoard.jspa?projectKey=PCOE&rapidView=12284"
+  },
+  "merging": {
+    "min_approvals": 2,
+    "min_maintainer_approvals": 1
+  },
+  "ci_cd": {
+    "name": "BMX",
+    "file": "Jenkinsfile"
+  },
+  "contributors": [
+    {
+      "name": "Shane Witbeck",
+      "email": "shane.witbeck@nike.com",
+      "company": "Nike"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Shane Witbeck",
+      "email": "shane.witbeck@nike.com",
+      "company": "Nike"
+    }
+  ],
+  "slack_channel": {
+    "name": "#proj-pcs-support",
+    "url": "https://nikedigital.slack.com/archives/C01K3DRJK3M"
+  },
+  "email": {
+    "name": "PCS Team Email",
+    "url": "mailto:Lst-PlatformCompositionSystem@nike.com"
+  }
+}
