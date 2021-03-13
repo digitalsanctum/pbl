@@ -1,6 +1,4 @@
-#[macro_use]
 extern crate clap;
-extern crate mustache;
 extern crate serde;
 #[macro_use]
 extern crate serde_derive;
@@ -8,56 +6,45 @@ extern crate serde_json;
 
 use std::error::Error;
 use std::fs::File;
-use std::io::{BufReader, BufWriter};
-use std::path::PathBuf;
+use std::io::BufReader;
+use std::path::{Path, PathBuf};
 
 use clap::{App, AppSettings, Arg, ArgMatches, SubCommand};
-use mustache::{Data, MapBuilder, Template};
-use serde_json::{Value, Map};
-use std::io;
+use ramhorns::Template;
+
+use crate::model::project::Project;
 
 mod model;
 
 fn main() -> Result<(), Box<dyn Error>> {
     let arg_matches: ArgMatches = App::new("publisher")
-        .version("0.0.1")
+        .version("0.1.0")
         .author("Shane Witbeck")
         .about("Publisher")
         .settings(&[AppSettings::ArgRequiredElseHelp])
-        .arg(
-            Arg::with_name("debug")
-                .help("Debug.")
-                .short("d")
-        )
+        .arg(Arg::with_name("debug").help("Debug").short("d"))
         .subcommand(
             SubCommand::with_name("render")
-                .about("Render an artifact")
+                .about("Render an artifact given a data file and template.")
                 .arg(
                     Arg::with_name("data")
-                        .help("Data path.")
+                        .help("A JSON data file")
                         .long("data")
                         .takes_value(true)
-                        .env("PB_DATA")
-                        .default_value("pb-data.json")
+                        .env("PBR_DATA")
+                        .default_value("pbr-data.json")
                         .required(true),
-                )
-                .arg(
-                    Arg::with_name("file")
-                        .help("Save rendered content to a file instead of stdout.")
-                        .short("f")
-                        .long("file")
-                        .takes_value(false)
-                        .default_value("pb-output")
                 )
                 .arg(
                     Arg::with_name("template")
-                        .help("Template to use.")
+                        .help("Mustache template")
                         .short("t")
                         .long("template")
                         .takes_value(true)
-                        .default_value("pb-template.mustache")
+                        .env("PBR_TEMPLATE")
+                        .default_value("pbr-template.mustache")
                         .required(true),
-                )
+                ),
         )
         .get_matches();
 
@@ -68,7 +55,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             if debug {
                 eprintln!("{:#?}", sub_m);
             }
-            let render_config = RenderConfig::from_args(debug, sub_m);
+            let render_config = RenderConfig::from_args(sub_m);
             if debug {
                 eprintln!("{:#?}", render_config);
             }
@@ -80,42 +67,33 @@ fn main() -> Result<(), Box<dyn Error>> {
     Ok(())
 }
 
+fn read_project_from_file<P: AsRef<Path>>(path: P) -> Result<Project, Box<dyn Error>> {
+    // Open the file in read-only mode with buffer.
+    let file = File::open(path)?;
+    let reader = BufReader::new(file);
+
+    // Read the JSON contents of the file as an instance of `Project`.
+    let project: Project = serde_json::from_reader(reader)?;
+
+    Ok(project)
+}
 
 fn render_handler(render_config: RenderConfig) -> Result<(), Box<dyn Error>> {
+    // Read project data from file
     let path_buf: PathBuf = [".", &render_config.data].iter().collect();
-    let file: File = File::open(&path_buf)
-        .unwrap_or_else(|_| panic!("Error opening file: {}", path_buf.to_str().unwrap()));
-    let reader: BufReader<File> = BufReader::new(file);
+    let project: Project = read_project_from_file(path_buf).expect("Error reading project data");
 
-    let data: Value = serde_json::de::from_reader(reader).expect("Error deserializing data");
-
-    // Define the data for the template
-    let data: Data = MapBuilder::new()
-        .insert("data", &data).expect("Error inserting data")
-        .build();
-
-    // Define the template
+    // Read template from file
     let template: String = render_config.template;
     let template_path: PathBuf = [".", &template].iter().collect();
-    let template: Template = mustache::compile_path(template_path).expect("Error reading or compiling template.");
+    let template_content: String =
+        std::fs::read_to_string(template_path).expect("Error reading template file");
+    let template: Template = Template::new(template_content).expect("Error instantiating template");
 
     // Render
-    match render_config.file {
-        Some(file) => {
+    let rendered = template.render(&project);
+    println!("{}", rendered);
 
-            // Create the output file
-            let output_path: PathBuf = PathBuf::from(file);
-            let output_file: File = File::create(&output_path).expect("Error creating output file.");
-
-            // Write the rendered data to the file specified
-            let mut output_buf: BufWriter<File> = BufWriter::new(output_file);
-            template.render_data(&mut output_buf, &data).expect("Error rendering output.");
-        }
-        None => {
-            // Write the rendered data to stdout
-            template.render_data(&mut io::stdout(), &data).expect("Error rendering output.");
-        }
-    }
     Ok(())
 }
 
@@ -123,28 +101,16 @@ fn render_handler(render_config: RenderConfig) -> Result<(), Box<dyn Error>> {
 struct RenderConfig {
     data: String,
     template: String,
-    file: Option<String>,
 }
 
 impl RenderConfig {
-    pub fn from_args(debug: bool, arg_matches: &ArgMatches) -> RenderConfig {
+    pub fn from_args(arg_matches: &ArgMatches) -> RenderConfig {
         let data = arg_matches.value_of("data").expect("Missing data");
         let template = arg_matches.value_of("template").expect("Missing template");
-        let file = arg_matches.value_of("file");
-        let pfile = match file {
-            Some(f) => Option::from(f.to_string()),
-            None => None
-        };
-        RenderConfig::new(data.to_string(), template.to_string(), pfile)
+        RenderConfig::new(data.to_string(), template.to_string())
     }
 
-    pub fn new(data: String,
-               template: String,
-               file: Option<String>) -> RenderConfig {
-        RenderConfig {
-            data,
-            template,
-            file,
-        }
+    pub fn new(data: String, template: String) -> RenderConfig {
+        RenderConfig { data, template }
     }
 }

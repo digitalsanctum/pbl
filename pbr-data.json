@@ -1,0 +1,73 @@
+{
+  "name": "FOO",
+  "description": "Some description about the project.",
+  "repo": {
+    "label": "foo-api",
+    "url": "https://github.digitalsanctum.com/foo/foo-api"
+  },
+  "change_log": {
+    "label": "CHANGELOG.md",
+    "url": "CHANGELOG.md"
+  },
+  "issue_tracker": {
+    "tool": {
+      "label": "JIRA",
+      "url": "https://jira.digitalsanctum.com/projects/FOO/summary"
+    },
+    "create_issue": {
+      "label": "Create a new issue",
+      "url": "https://jira.digitalsanctum.com/secure/CreateIssue!default.jspa"
+    },
+    "existing_issues": {
+      "label": "View existing issues",
+      "url": "https://jira.digitalsanctum.com/secure/RapidBoard.jspa?projectKey=FOO&rapidView=12284"
+    }
+  },
+  "merge_requirements": {
+    "min_approvals": 2,
+    "min_maintainer_approvals": 1
+  },
+  "ci_cd": {
+    "tool": {
+      "label": "Jenkins",
+      "url": "https://jenkins.digitalsanctum.com"
+    },
+    "files": [
+      {
+        "label": "Jenkinsfile",
+        "url": "Jenkinsfile"
+      }
+    ]
+  },
+  "contributors": [
+    {
+      "name": "Shane Witbeck",
+      "email": "shane.witbeck@digitalsanctum.com",
+      "company": "digitalsanctum"
+    },
+    {
+      "name": "Joe Shmoe",
+      "email": "joe.shmoe@futz.io"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Shane Witbeck"
+    },
+    {
+      "name": "John Doe",
+      "email": "john.doe@digitalsanctum.com",
+      "company": "digitalsanctum"
+    }
+  ],
+  "communications": [
+    {
+      "label": "#proj-foo-support Slack channel",
+      "url": "https://digitalsanctum.slack.com/archives/C01K3DRJK3M"
+    },
+    {
+      "label": "foo Team Email",
+      "url": "mailto:Lst-Foo@digitalsanctum.com"
+    }
+  ]
+}

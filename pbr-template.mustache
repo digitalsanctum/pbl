@@ -1,0 +1,81 @@
+# Contributing
+
+The {{name}} team welcomes anyone that wants to help out in any way, whether that includes reporting
+problems, helping with documentation, or contributing code changes to fix bugs, add tests, or implement new features.
+This document outlines the basic steps required to work with and contribute to the {{#repo}}[{{label}}]({{url}}){{/repo}} codebase.
+
+
+### Code Contribution Checklist
+
+1. Open an issue to begin the discussion about your contribution.
+1. Fork and/or branch the repository.
+1. Make your changes along with unit tests and integration tests if necessary.
+{{#change_log}}1. Update [{{label}}]({{url}}) with link to issue.{{/change_log}}
+1. Commit and push changes and reference your opened issue in the commit message.
+1. Verify the changes compile, all tests and checks pass.
+1. Open a pull request (PR) with a description of your changes. In most cases, you should also have a link back to the issue as well so that anyone can easily gain more context about the change.
+
+
+### General Guidelines
+
+* Maintain consistency. Every effort should be taken to follow the established patterns, naming conventions, etc.
+* Minimize dependencies. If you add any dependencies, then an explanation of why should be included in the PR description.
+* Be liberal with code comments. Make it easy for anyone looking at the code for the first time to understand what the code is doing and why. This advice also applies to PR comments. Be proactive about answering questions that might come up or what the intentions are.
+* Write good tests. Test the happy paths as well as the exceptional and edge cases.
+* Do not, under any circumstances, add secrets to the source.
+
+
+### Guidelines For Pull Requests
+
+How to get your contributions merged smoothly and quickly.
+
+* Create smaller PRs that are narrowly focused on addressing a single concern. We often times receive PRs that are trying to fix several things at a time, making the review process difficult. Create more PRs to address different concerns for faster resolution.
+* Make sure to add new tests for bugs in order to catch regressions and to test any newly added functionality.
+* For speculative changes, consider opening an issue and discussing it first. If you are suggesting a behavioral or API change, consider starting with a proposal.
+* Provide a good PR description as a record of what change is being made and why it was made. Link to a {{#issue_tracker}}{{#tool}}{{name}}{{/tool}}{{/issue_tracker}} issue if it exists.
+* Don't fix code style and formatting unless you are already changing that line to address an issue. If you do want to fix formatting or style, do that in a separate PR.
+* Unless your PR is trivial, you should expect there will be reviewer comments that you'll need to address before merging. The expectation is that you will be reasonably responsive to those comments, otherwise the PR becomes stale and more difficult to merge.
+* Maintain clean commit history and use meaningful commit messages. PRs with messy commit history are difficult to review and won't be merged. Use `rebase -i upstream/master` to curate your commit history and/or to bring in latest changes from master but avoid rebasing in the middle of a code review.
+* Keep your PR up to date with upstream/master. If there are merge conflicts or PR check failures, these should be addressed prior to communicating that a PR is ready for review. PR drafts can be helpful here.
+* Care should be taken to squash trivial commits.
+* Be intentional about each commit by conveying a clear description of what the commit includes.
+
+{{#merge_requirements}}
+### Requirements for Merging
+
+* Each PR must have at least {{min_approvals}} approvals.
+* Of those approvals, at least {{min_maintainer_approvals}} must be an approval from a maintainer.
+{{/merge_requirements}}
+
+{{#ci_cd}}
+### Pipeline
+
+{{#tool}}* This project uses [{{label}}]({{url}}) for CI/CD.{{/tool}}
+{{#file}}* The pipeline for this project is defined in the [{{label}}]({{url}}) file.{{/file}}
+{{/ci_cd}}
+
+{{#issue_tracker}}
+### Issue Tracker
+
+This project uses {{#tool}}[{{label}}]({{url}}){{/tool}}. {{#create_issue}}[{{label}}]({{url}}){{/create_issue}}
+or {{#existing_issues}}[{{label}}]({{url}}){{/existing_issues}}.
+{{/issue_tracker}}
+
+{{#contributors}}
+### Contributors
+
+{{#contributors}}* {{^email}}{{name}}{{/email}}{{#email}}[{{name}}](mailto:{{email}}){{/email}}{{#company}}, {{company}}{{/company}}
+{{/contributors}}
+{{/contributors}}
+
+
+### Maintainers
+
+{{#maintainers}}* {{^email}}{{name}}{{/email}}{{#email}}[{{name}}](mailto:{{email}}){{/email}}{{#company}}, {{company}}{{/company}}
+{{/maintainers}}
+
+
+### Communications
+
+{{#communications}}* [{{label}}]({{url}})
+{{/communications}}

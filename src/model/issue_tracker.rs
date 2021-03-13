@@ -1,16 +1,10 @@
-#[derive(Clone, Debug, Deserialize, Serialize)]
+use crate::model::link::Link;
+
+#[derive(Clone, ramhorns::Content, Debug, Deserialize, Serialize)]
 pub struct IssueTracker {
-    name: String,
-    base_url: String,
-    create_issue_url: String,
-    existing_issues_url: String,
+    tool: Link,
+    create_issue: Link,
+    existing_issues: Link,
 }
 
-impl IssueTracker {
-    pub fn new(name: String,
-               base_url: String,
-               create_issue_url: String,
-               existing_issues_url: String, ) -> IssueTracker {
-        IssueTracker { name, base_url, create_issue_url, existing_issues_url }
-    }
-}
+impl IssueTracker {}

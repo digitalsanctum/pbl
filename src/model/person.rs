@@ -1,14 +1,9 @@
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, ramhorns::Content, Debug, Deserialize, Serialize)]
 pub struct Person {
     name: String,
-    email: String,
-    company: String,
+    email: Option<String>,
+    company: Option<String>,
+    location: Option<String>,
 }
 
-impl Person {
-    pub fn new(name: String,
-               email: String,
-               company: String) -> Person {
-        Person { name, email, company }
-    }
-}
+impl Person {}

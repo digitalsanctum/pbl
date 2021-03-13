@@ -1,42 +1,21 @@
-use crate::model::issue_tracker::IssueTracker;
 use crate::model::ci_cd::CiCd;
-use crate::model::person::Person;
-use crate::model::team::Team;
+use crate::model::issue_tracker::IssueTracker;
+use crate::model::link::Link;
 use crate::model::merge_requirements::MergeRequirements;
+use crate::model::person::Person;
 
-#[derive(Clone, Debug, Deserialize, Serialize)]
+#[derive(Clone, ramhorns::Content, Debug, Deserialize, Serialize)]
 pub struct Project {
     name: String,
-    repo_name: String,
-    change_log: String,
-    issue_tracker: IssueTracker,
-    merge_requirements: MergeRequirements,
-    ci_cd: CiCd,
-    contributors: Vec<Person>,
-    maintainers: Vec<Person>,
-    team: Team
+    description: Option<String>,
+    repo: Link,
+    change_log: Link,
+    issue_tracker: Option<IssueTracker>,
+    merge_requirements: Option<MergeRequirements>,
+    ci_cd: Option<CiCd>,
+    contributors: Option<Vec<Person>>,
+    maintainers: Option<Vec<Person>>,
+    communications: Option<Vec<Link>>,
 }
 
-impl Project {
-    pub fn new(name: String,
-               repo_name: String,
-               change_log: String,
-               issue_tracker: IssueTracker,
-               merge_requirements: MergeRequirements,
-               ci_cd: CiCd,
-               contributors: Vec<Person>,
-               maintainers: Vec<Person>,
-               team: Team) -> Project {
-        Project {
-            name,
-            repo_name,
-            change_log,
-            issue_tracker,
-            merge_requirements,
-            ci_cd,
-            contributors,
-            maintainers,
-            team
-        }
-    }
-}
+impl Project {}
