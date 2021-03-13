@@ -16,11 +16,14 @@ use crate::model::project::Project;
 
 mod model;
 
+const NAME: &'static str = env!("CARGO_PKG_NAME");
+const DESCRIPTION: &'static str = env!("CARGO_PKG_DESCRIPTION");
+const VERSION: &'static str = env!("CARGO_PKG_VERSION");
+
 fn main() -> Result<(), Box<dyn Error>> {
-    let arg_matches: ArgMatches = App::new("publisher")
-        .version("0.1.1")
-        .author("Shane Witbeck")
-        .about("Publisher")
+    let arg_matches: ArgMatches = App::new(NAME)
+        .version(VERSION)
+        .about(DESCRIPTION)
         .settings(&[AppSettings::ArgRequiredElseHelp])
         .arg(Arg::with_name("debug").help("Debug").short("d"))
         .subcommand(
