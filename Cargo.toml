@@ -11,6 +11,11 @@ exclude = [
     "*.json",
     "*.mustache"
 ]
+keywords = ["cli", "mustache", "publisher", "template"]
+categories = ["command-line-utilities", "command-line-interface", "rendering", "parsing", "template-engine"]
+
+[badges]
+maintenance = { status = "actively-maintained" }
 
 [dependencies]
 clap = "2.33.1"
