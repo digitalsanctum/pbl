@@ -1,6 +1,6 @@
 [package]
 name = "pbl"
-version = "0.2.0"
+version = "0.2.1"
 description = "A simple command line application for rendering templates from structured data and a template."
 authors = ["Shane Witbeck <shane@digitalsanctum.com>"]
 edition = "2021"
