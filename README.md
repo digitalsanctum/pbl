@@ -1,24 +1,62 @@
 # Publisher (pbl)
 
-Publisher is a simple command line application for creating artifacts from data
-and a mustache template.
+Publisher is a simple command line application for rendering templates from structured data
+and a template.
 
 ## Usage
 
 ```
-Render an artifact given a data file and template.
+A simple command line application for rendering templates from structured data and a template.
 
 USAGE:
-    pbl render --data <data> --template <template>
-
-FLAGS:
-    -h, --help       Prints help information
-    -V, --version    Prints version information
+    pbl --data <DATA> --template <TEMPLATE>
 
 OPTIONS:
-        --data <data>            A JSON data file [env: PBL_DATA=]  [default: pbl-data.json]
-    -t, --template <template>    Mustache template [env: PBL_TEMPLATE=]  [default: pbl-template.mustache]
+    -d, --data <DATA>            Path to the data file
+    -h, --help                   Print help information
+    -t, --template <TEMPLATE>    Path to the template file
+    -V, --version                Print version information
 ```
+
+## Examples
+
+Given a data file, `data.json`:
+```json
+{
+  "title": "My Blog",
+  "body": "blah"
+}
+```
+
+and a template, `template.mustache`:
+```mustache
+<html lang="en">
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    {{body}}
+  </body>
+</html>
+```
+
+the following command will render the template:
+```shell
+pbl render --data data.json --template template.mustache
+```
+
+By default, the result is written to `stdout` and will look like:
+```html
+<html lang="en">
+<head>
+  <title>My Blog</title>
+</head>
+<body>
+blah
+</body>
+</html>
+```
+
 
 ## Why was pbl created?
 
@@ -27,6 +65,10 @@ document for a project given a data file describing the project.
 
 ## Roadmap
 
-* Support additional artifacts.
-* Given a Mustache template, parse the data it requires and return an empty 
-  serialized data file. 
+* Add support for transformations.
+* Add support for [json-e](https://json-e.js.org/).
+* Ability to specify output path(s).
+* Add support for multiple template engines.
+* Add support for multiple data formats.
+* Given a template, parse the data it requires and return an empty 
+  serialized data file or prompt for values. 
