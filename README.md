@@ -9,12 +9,15 @@ and a template.
 A simple command line application for rendering templates from structured data and a template.
 
 USAGE:
-    pbl --data <DATA> --template <TEMPLATE>
+    pbl [OPTIONS]
 
 OPTIONS:
-    -d, --data <DATA>            Path to the data file
+    -d, --data <DATA>            Path to the data file [env: PBL_DATA=] [default: data.json]
     -h, --help                   Print help information
-    -t, --template <TEMPLATE>    Path to the template file
+    -o, --output <OUTPUT>        Output file [env: PBL_OUTPUT=] [default: ]
+    -t, --template <TEMPLATE>    Path to the template file [env: PBL_TEMPLATE=] [default:
+                                 template.mustache]
+    -v, --verbose                Verbose mode for debugging
     -V, --version                Print version information
 ```
 
@@ -32,10 +35,11 @@ and a template, `template.mustache`:
 ```mustache
 <html lang="en">
   <head>
-    <title>{{title}}</title>
+    <title>{{data.title}}</title>
   </head>
   <body>
-    {{body}}
+    <p>Author: {{env.USER}}</p>
+    {{data.body}}
   </body>
 </html>
 ```

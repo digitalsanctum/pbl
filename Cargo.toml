@@ -1,6 +1,6 @@
 [package]
 name = "pbl"
-version = "0.2.1"
+version = "0.4.0"
 description = "A simple command line application for rendering templates from structured data and a template."
 authors = ["Shane Witbeck <shane@digitalsanctum.com>"]
 edition = "2021"
@@ -24,3 +24,4 @@ mustache = "0.9.0"
 serde = "1"
 serde_derive = "1"
 serde_json = "1"
+chrono = "0.4"

@@ -16,6 +16,29 @@ Types of changes:
 
 
 ## Unreleased
+
+## [1.0.0] - 2023-06-04
+
+### Added
+- Added default values for `data` and `template` args. The default values are `data.json` and `template.mustache` respectively.
+- Added `output` arg to specify output file path.
+- Added `verbose` arg to enable verbose logging.
+- Environment variables are now available in templates.
+- The following environment variables can now be used to specify args:
+    - `PBL_DATA`
+    - `PBL_TEMPLATE`
+    - `PBL_OUTPUT`
+- Added augmented data. (BREAKING CHANGE) The following struct is now used to represent augmented data:
+```rust
+let augmented_data = AllData {
+    data: val.clone(),
+    env: std::env::vars().collect(),
+    config: render_config.clone(),
+    formatted_date: formatted_date(),
+};
+```    
+
+
 ## [0.2.0] - 2022-01-17
 
 ### Added
