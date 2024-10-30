@@ -2,12 +2,12 @@
 name = "pbl"
 version = "1.0.0"
 description = "A simple command line application for rendering templates from structured data and a template."
-authors = ["Shane Witbeck <shane@digitalsanctum.com>"]
+authors = ["Shane Witbeck <shane@surly.dev>"]
 edition = "2021"
 license-file = "LICENSE"
 readme = "README.md"
-homepage = "https://github.com/digitalsanctum/pbl"
-repository = "https://github.com/digitalsanctum/pbl"
+homepage = "https://github.com/thesurlydev/pbl"
+repository = "https://github.com/thesurlydev/pbl"
 exclude = [
     "*.json",
     "*.mustache"
